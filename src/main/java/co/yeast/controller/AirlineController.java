@@ -21,49 +21,46 @@ public class AirlineController {
         model.addAttribute("list", airlineService.getAirlineList());
         return "airline/list";    // views/ 이하 실제 경로의 파일을 보여준다
     }
-    /*
 
-    // edit과 같은 코드, @RequestParam 사용하여 seq 받기
+    // edit과 같은 코드, @RequestParam 사용하여 id 받기
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewPost(@RequestParam("id") int id, Model model){
-        BoardVO boardVO = boardService.getBoard(id);
+        AirlineVO boardVO = airlineService.getAirline(id);
         model.addAttribute("u", boardVO);
-        return "board/view";
+        return "airline/view";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addPost(){
-        return "board/addpostform";
+        return "airline/addpostform";
     }
 
     @RequestMapping(value = "/addok", method = RequestMethod.POST)
-    public String addPostOK(BoardVO vo){
-        if(boardService.insertBoard(vo) == 0) System.out.println("데이터 추가 실패");
+    public String addPostOK(AirlineVO vo){
+        if(airlineService.insertAirline(vo) == 0) System.out.println("데이터 추가 실패");
         else System.out.println("데이터 추가 성공!!");
         return "redirect:list";
     }
 
     @RequestMapping(value = "/editform/{id}", method = RequestMethod.GET)
     public String editPost(@PathVariable("id") int id, Model model){
-        BoardVO boardVO = boardService.getBoard(id);
+        AirlineVO airlineVO = airlineService.getAirline(id);
         // System.out.println("boardVO.getTitle(): "+ boardVO.getTitle());
-        model.addAttribute("u", boardVO);
-        return "board/editform";
+        model.addAttribute("u", airlineVO);
+        return "airline/editform";
     }
 
     @RequestMapping(value = "/editok", method = RequestMethod.POST)
-    public String editPostOk(BoardVO vo){
-        if(boardService.updateBoard(vo) == 0) System.out.println("데이터 수정 실패");
+    public String editPostOk(AirlineVO vo){
+        if(airlineService.updateAirline(vo) == 0) System.out.println("데이터 수정 실패");
         else System.out.println("데이터 수정 성공!!");
         return "redirect:list";
     }
 
     @RequestMapping(value = "/deleteok/{id}", method = RequestMethod.GET)
     public String deletePostOk(@PathVariable("id") int id){
-        if(boardService.deleteBoard(id) == 0) System.out.println("데이터 삭제 실패");
+        if(airlineService.deleteAirline(id) == 0) System.out.println("데이터 삭제 실패");
         else System.out.println("데이터 삭제 성공!!");
         return "redirect:../list";
     }
-
-     */
 }

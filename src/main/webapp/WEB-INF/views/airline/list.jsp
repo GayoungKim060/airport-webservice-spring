@@ -52,7 +52,7 @@
                     <span class="badge rounded-pill text-bg-dark fs-6" id="scheduledBadge"onclick="sort('Scheduled')">Scheduled</span>
                 </div>
 
-                <button type="button" class="btn btn-outline-dark me-2" onclick="location.href='addform.jsp'">Add</button>
+                <button type="button" class="btn btn-outline-dark me-2" onclick="location.href='add'">Add</button>
             </div>
         </div>
         <div class="card-body">
@@ -75,7 +75,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${list}" var="u">
-                            <tr onclick="location.href='view.jsp?id=${u.getId()}'">
+                            <tr onclick="location.href='view?id=${u.getId()}'">
                                 <td class="text-truncate text-center">${u.getId()}</td>
                                 <td><img src="/img/logo_${u.getAirline()}.png" alt="airlineLogo"></td>
                                 <td class="text-truncate">
@@ -104,8 +104,9 @@
                                 </c:choose>
 
                                 <td class="text-truncate text-center">
-                                    <a href="editform.jsp?id=${u.getId()}"><img src="/img/icon_editor.png" alt="edit" class="m-r-14"></a>
-                                    <a href="deletepost.jsp?id=${u.getId()}"><img src="/img/icon_delete.png" alt="delete" class="img-delete"></a>
+                                    <a href="editform/${u.getId()}"><img src="/img/icon_editor.png" alt="edit" class="m-r-14"></a>
+                                    <%-- confirm창 후 넘어가기? js로 처리해야하는데 tr list때문에 적용안됨 --%>
+                                    <a href="deleteok/${u.getId()}"><img src="/img/icon_delete.png" alt="delete"></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -195,7 +196,9 @@
 
         function delete_ok(id){
             var a = confirm("정말로 삭제하겠습니까?");
-            if(a) location.href='deletepost.jsp?id=' + id;
+            if(a) location.href='deleteok/' + id;
+            //  아무것도 안해주면 <tr onclick>이 적용되서 view페이지로 넘어감, reload 해줘야함
+            window.location.reload();
         }
     };
 

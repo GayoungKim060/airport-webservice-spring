@@ -12,5 +12,9 @@
 
 <p> The time on the server is ${serverTime}.</p>
 <img src="img/logo_seagull.png" class="logo-seagull"/>
+
+<p> <a href="airline/list">Move to Airport Panel </a> </p>
+
+<%--<jsp:forward page="airline/list" />--%>
 </body>
 </html>

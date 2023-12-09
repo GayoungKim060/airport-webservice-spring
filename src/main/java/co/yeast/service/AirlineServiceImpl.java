@@ -14,17 +14,17 @@ public class AirlineServiceImpl implements AirlineService{
 
     @Override
     public int insertAirline(AirlineVO vo) {
-        return 0;
+        return airlineDAO.insertAirline(vo);
     }
 
     @Override
     public int deleteAirline(int id) {
-        return 0;
+        return airlineDAO.deleteAirline(id);
     }
 
     @Override
     public int updateAirline(AirlineVO vo) {
-        return 0;
+        return airlineDAO.updateAirline(vo);
     }
 
     @Override

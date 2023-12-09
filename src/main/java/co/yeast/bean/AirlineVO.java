@@ -2,6 +2,7 @@ package co.yeast.bean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class AirlineVO {
@@ -33,7 +34,11 @@ public class AirlineVO {
     }
 
     public void setTakeoffDate(String takeoffDate) {
-        this.takeoffDate = takeoffDate;
+        // takeoffDate는 vo를 생성하는 시점에서 새로운 date가 생성되지만, insert할때만 사용한다
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+        this.takeoffDate = formattedDate;
     }
 
     public String getAirline() {
@@ -68,16 +73,16 @@ public class AirlineVO {
         this.dest = dest;
     }
 
-    // flightNum
     public String getTakeoffTime() {
         return takeoffTime;
     }
 
     public void setTakeoffTime(String takeoffTime) {
-        this.takeoffTime = takeoffTime+":00";   // <input type="time">은 HH:MM 형식으로 저장되지만 DB time 형식은 HH:MM:SS
-        // null일때 null:00으로 저장됨
+        // 필수 필드로 validation check는 javascript로 하기. 항상 넘어오는 값이 존재해야함
+        this.takeoffTime = takeoffTime+":00";   // <input type="time">은 HH:MM 형식으로 저장되지만
+                                                // DB time 형식인 HH:MM:SS 맞춰줘야함
+                                                // null일때 null:00으로 저장됨
     }
-
     public String getGateAlpha() {
         return gateAlpha;
     }
@@ -99,7 +104,15 @@ public class AirlineVO {
     }
 
     public void setTakeoffTimeNew(String takeoffTimeNew) {
-        this.takeoffTimeNew = takeoffTimeNew+":00";   // <input type="time">은 HH:MM 형식으로 저장되지만 DB time 형식은 HH:MM:SS
+        // <input type="time"> 선택하지 않으면 null이 아닌 빈문자열("")이 넘어옴
+        // null, "" , " " 구분
+        if( "".equals(takeoffTimeNew) ){
+            this.takeoffTimeNew = null;
+        }else{  // TODO java string format을 사용해보자
+            // <input type="time">은 HH:MM 형식으로 저장되지만
+            // DB time 형식인 HH:MM:SS 맞춰줘야함
+            this.takeoffTimeNew = takeoffTimeNew+":00";
+        }
     }
 
     public String getRemark() {
