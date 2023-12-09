@@ -1,0 +1,282 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/************** Reset CSS Style ******************/
+
+.m-2{
+    margin: 2px;
+}
+/**********************************************************
+                            Sizing
+***********************************************************/
+
+/* header */
+header .logo-seagull{
+    margin: 0 10px;
+    width: 50px;
+}
+
+.card-header #card-header-left{
+    width: 40%;
+}
+
+.card-header #card-header-right{
+    width: 50%;
+}
+/* container-list */
+body{
+    background-color: #f6f6f6;
+    margin-top:20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+
+.card .card-header {
+    border-bottom-color: #f9f9f9;
+    line-height: 30px;
+    -ms-grid-row-align: center;
+    align-self: center;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* header clock */
+#header-clock {
+    /*background-color: red;*/
+    transform: translateY(33%);
+}
+
+#time {
+    font-family: 'Nova Mono', monospace;
+    font-size: 2vw;
+    text-align: center;
+    text-shadow: 0px 0px 20px white;
+}
+
+#date {
+    font-family: 'Nova Mono', monospace;
+    font-size: 2vmin;
+    text-align: center;
+    text-shadow: 0px 0px 20px;
+    vertical-align: middle;
+}
+
+#area{
+    font-family: 'Nova Mono', monospace;
+    font-size: 2vmin;
+    text-align: center;
+    text-shadow: 0px 0px 20px;
+    vertical-align: middle;
+}
+/* user settings */
+#user-wrapper{
+
+}
+
+#user-wrapper > button > img{
+    max-height: 18px;
+    max-width: 18px;
+}
+
+/* badge */
+.badge{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/* search */
+.card .card-header input[type="search"]{
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 0 30px 0 14px;
+    height: 40px;
+}
+/* search clear 버튼 삭제 */
+.card .card-header input[type="search"]::-webkit-search-cancel-button{
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.card .card-header input[type="search"]:focus{
+    outline: none;
+}
+/* clear 이미지 layout */
+.search-wrapper{
+    position: relative;
+    height: 18px;
+}
+.card .card-header img{
+    height: inherit;
+    position: absolute;
+    top: 11px;
+    right: 13px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.card .card-header button{
+    border-width: 2px;
+}
+
+.card .card-header, .card .card-body, .card .card-footer {
+    background-color: transparent;
+    padding: 20px 25px;
+}
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.table:not(.table-sm) thead th {
+    border-bottom: none;
+    background-color: #e9e9eb;
+    color: #666;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.table tbody tr td img{
+    width: 27px;
+}
+
+.table tbody tr td:nth-child(2){
+    text-align: right;
+}
+
+.text.boarding{
+    color: #007bff;
+}
+.text.cancelled{
+    color: #f44336;
+}
+.text.delayed{
+    color: goldenrod;
+}
+table .text{
+    font-weight: bold;
+}
+
+.progress-bar {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #007bff;
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+.bg-success {
+    background-color: #54ca68 !important;
+}
+
+.bg-purple {
+    background-color: #9c27b0 !important;
+    color: #fff;
+}
+
+.bg-cyan {
+    background-color: #10cfbd !important;
+    color: #fff;
+}
+
+.bg-red {
+    background-color: #f44336 !important;
+    color: #fff;
+}
+
+.progress {
+    -webkit-box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.15);
+    box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.15);
+}
+/* ==========================================================================
+   #SPACING
+   ========================================================================== */
+.m-r-14 {
+    margin-right: 14px;
+}
+
+.m-r-27 {
+    margin-right: 27px;
+}
+
+.m-b-55 {
+    margin-bottom: 55px;
+}
+
+/* Footer */
+footer{
+
+}
