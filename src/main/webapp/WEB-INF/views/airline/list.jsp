@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>HAN Airport</title>
-    <link rel="stylesheet" href="posts.css">
+    <link rel="stylesheet" href="/css/posts.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <div id="menu-wrapper" class="">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <img src="logo-seagull.png" class="logo-seagull"/>
+                <img src="/img/logo_seagull.png" class="logo-seagull"/>
                 HAN Airport
             </a></li>
         </ul>
@@ -27,9 +27,9 @@
     </div>
 
     <div id="user-wrapper" class="text-end d-flex flex-row">
-        <button type="button" class="btn btn-light m-1"><img src="img/icon-settings.png"></button>
-        <button type="button" class="btn btn-light m-1"><img src="img/icon-alarm.png"></button>
-        <button type="button" class="btn btn-light m-1"><img src="img/icon-user.png"></button>
+        <button type="button" class="btn btn-light m-1"><img src="/img/icon_settings.png"></button>
+        <button type="button" class="btn btn-light m-1"><img src="/img/icon_alarm.png"></button>
+        <button type="button" class="btn btn-light m-1"><img src="/img/icon_user.png"></button>
     </div>
 </header>
 
@@ -41,7 +41,7 @@
                 <h2 class="">Departures</h2>
                 <div class="search-wrapper ">
                     <input type="search" class="text-bg-white " placeholder="search" aria-label="Search">
-                    <img src="img/icon-search-delete.png" class="btn-clear">
+                    <img src="/img/icon_search_delete.png" class="btn-clear">
                 </div>
             </div>
             <div id="card-header-right" class="d-flex flex-wrap justify-content-around align-items-baseline" >
@@ -77,7 +77,7 @@
                         <c:forEach items="${list}" var="u">
                             <tr onclick="location.href='view.jsp?id=${u.getId()}'">
                                 <td class="text-truncate text-center">${u.getId()}</td>
-                                <td><img src="img/logo-${u.getAirline()}.png" alt="airlineLogo"></td>
+                                <td><img src="/img/logo_${u.getAirline()}.png" alt="airlineLogo"></td>
                                 <td class="text-truncate">
                                         ${u.getAirline()} AIR
                                 </td>
@@ -104,8 +104,8 @@
                                 </c:choose>
 
                                 <td class="text-truncate text-center">
-                                    <a href="editform.jsp?id=${u.getId()}"><img src="img/icon-editor.png" alt="edit" class="m-r-14"></a>
-                                    <a href="deletepost.jsp?id=${u.getId()}"><img src="img/icon-delete.png" alt="delete" class="img-delete"></a>
+                                    <a href="editform.jsp?id=${u.getId()}"><img src="/img/icon_editor.png" alt="edit" class="m-r-14"></a>
+                                    <a href="deletepost.jsp?id=${u.getId()}"><img src="/img/icon_delete.png" alt="delete" class="img-delete"></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -144,7 +144,7 @@
         </a>
         <div class="d-inline-block">
             <span class="mb-3 mb-md-0 text-body-secondary">2023 Handong in Pohang, Republic of Korea, Univ </span>
-            <a href="https://www.handong.edu/kor/"><img src="img/icon-univ.png" style="width: 20px; background: white"></a>
+            <a href="https://www.handong.edu/kor/"><img src="/img/icon_univ.png" style="width: 20px; background: white"></a>
         </div>
     </div>
 

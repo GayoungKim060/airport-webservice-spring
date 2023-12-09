@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>Spring - Hello World</title>
 </head>
 <body>
 
 <h2>Hello World!</h2>
 
 <p> The time on the server is ${serverTime}.</p>
-<img src="spring.jpg"/>
+<img src="img/logo_seagull.png" class="logo-seagull"/>
 </body>
 </html>
