@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page import="co.yeast.dao.AirlineDAO, co.yeast.bean.AirlineVO, java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Style -->
-    <link rel="stylesheet" href="/css/loginForm.css">
+    <link rel="stylesheet" href="/css/loginform.css">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
-
 </head>
 <body>
 
@@ -20,7 +19,7 @@
 
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="mb-4">
+                <div class="mb-3">
                     <h3>Sign In</h3>
                     <p class="mb-4">Welcome to Han Airport. Always with Your Journey.</p>
                 </div>
@@ -41,22 +40,24 @@
                             <input type="checkbox" checked="checked"/>
                             <div class="control__indicator"></div>
                         </label>
-                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                        <span class="ms-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
                     </div>
 
-                    <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                    <div class="d-grid">
+                        <input type="submit" value="Log In" class="btn btn-primary">
+                    </div>
 
                     <span class="d-block text-center my-4 text-muted">&mdash; or &mdash;</span>
 
                     <div class="social-login">
                         <a href="#" class="facebook btn d-flex justify-content-center align-items-center">
-                            <span class="icon-facebook mr-3"></span> Login with Facebook
+                            <span class="icon-facebook mx-3"></span> Login with Facebook
                         </a>
-                        <a href="#" class="twitter btn d-flex justify-content-center align-items-center">
-                            <span class="icon-twitter mr-3"></span> Login with  Twitter
+                        <a href="#" class="Naver btn d-flex justify-content-center align-items-center">
+                            <span class="icon-twitter mx-3"></span> Login with  NAVER
                         </a>
                         <a href="#" class="google btn d-flex justify-content-center align-items-center">
-                            <span class="icon-google mr-3"></span> Login with  Google
+                            <img src="/img/icon_google.png" alt="GOOGLE" class="mx-3 icon-google">Login with Google
                         </a>
                     </div>
 

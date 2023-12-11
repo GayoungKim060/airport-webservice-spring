@@ -1,6 +1,6 @@
 body {
     font-family: "Roboto", sans-serif;
-    background-color: #b32727; }
+    background-color: #ffffff; }
 
 p {
     color: #b3b3b3;
@@ -102,14 +102,17 @@ h2 {
     background: #3b5998; }
 .social-login a.facebook:hover {
     background: #344e86; }
-.social-login a.twitter {
-    background: #1da1f2; }
-.social-login a.twitter:hover {
-    background: #0d95e8; }
+.social-login a.Naver {
+    background: #2DB400; }
+.social-login a.Naver:hover {
+    background: #28a100; }
 .social-login a.google {
     background: #ea4335; }
 .social-login a.google:hover {
     background: #e82e1e; }
+.icon-google{
+    width: 18px;
+}
 
 .control {
     display: block;
