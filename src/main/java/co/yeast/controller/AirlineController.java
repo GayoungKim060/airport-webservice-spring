@@ -17,7 +17,7 @@ public class AirlineController {
     AirlineServiceImpl airlineService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String boardlist(Model model){
+    public String list(Model model){
         model.addAttribute("list", airlineService.getAirlineList());
         return "airline/list";    // views/ 이하 실제 경로의 파일을 보여준다
     }
@@ -25,8 +25,8 @@ public class AirlineController {
     // edit과 같은 코드, @RequestParam 사용하여 id 받기
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewPost(@RequestParam("id") int id, Model model){
-        AirlineVO boardVO = airlineService.getAirline(id);
-        model.addAttribute("u", boardVO);
+        AirlineVO airlineVO = airlineService.getAirline(id);
+        model.addAttribute("u", airlineVO);
         return "airline/view";
     }
 

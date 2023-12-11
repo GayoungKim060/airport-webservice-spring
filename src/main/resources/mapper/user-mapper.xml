@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User">
+    <!--  resultType은 typealias추가후 user로 표기 가능  -->
+    <select id="getUser" resultType="co.yeast.bean.UserVO">
+        select userid, username from member where userid=#{userid} and password=#{password}
+    </select>
+
+</mapper>
