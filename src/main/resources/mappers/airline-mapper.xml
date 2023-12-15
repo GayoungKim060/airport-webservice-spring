@@ -14,10 +14,10 @@
     <delete id="deleteAirline">
         delete from airline where id=#{id}
     </delete>
-    <select id="getAirline" resultType="airline">
+    <select id="getAirline" resultType="Airline">
         select * from airline where id=#{id}
     </select>
-    <select id="getAirlineList" resultType="airline">
+    <select id="getAirlineList" resultType="Airline">
         select * from airline order by id desc
     </select>
 </mapper>
