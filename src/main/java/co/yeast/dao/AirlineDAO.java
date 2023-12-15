@@ -1,6 +1,7 @@
 package co.yeast.dao;
 
 import co.yeast.bean.AirlineVO;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,10 +10,12 @@ import java.util.List;
 
 @Repository
 public class AirlineDAO {
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    SqlSession sqlSession;
 
     public int insertAirline(AirlineVO vo) {
+        /*
         System.out.println("===> JDBC로 insertAirline() 기능 처리");
 
         // 입력되지 않은 값은 database에 null 값으로 셋팅해주기 위한 변수처리
@@ -34,7 +37,16 @@ public class AirlineDAO {
                 + "'" + vo.getRemark() +"',"
                 + managerTel +","
                 + note +")";
+
+
         return jdbcTemplate.update(sql);
+         */
+        vo.setFlightName(convertFlightName(vo.getAirline()));
+        vo.setTakeoffTimeNew(vo.getTakeoffTimeNew() != null ? "'" + vo.getTakeoffTimeNew() + "'" : null);
+        vo.setManagerTel(!vo.getManagerTel().isEmpty() ? "'" + vo.getManagerTel() + "'" : null);
+        vo.setNote(!vo.getNote().isEmpty() ? "'" + vo.getNote() + "'" : null);
+
+        return sqlSession.insert("Airline.insertAirline", vo);
     }
     private String convertFlightName(String airline){
         if(airline.equals("Delta")) return "DA";
@@ -45,6 +57,7 @@ public class AirlineDAO {
     }
 
     public int updateAirline(AirlineVO vo) {
+        /*
         System.out.println("===> JDBC로 updateAirline() 기능 처리");
         String takeoffTimeNew = vo.getTakeoffTimeNew() != null ? "'" + vo.getTakeoffTimeNew() + "'" : "null";
         String managerTel = !vo.getManagerTel().isEmpty() ? "'" + vo.getManagerTel() + "'" : null;
@@ -62,21 +75,40 @@ public class AirlineDAO {
                 + " managerTel=" + managerTel + ","
                 + " note= " + note + " where id=" + vo.getId();
         return jdbcTemplate.update(sql);
+         */
+        vo.setFlightName(convertFlightName(vo.getAirline()));
+        vo.setTakeoffTimeNew(vo.getTakeoffTimeNew() != null ? "'" + vo.getTakeoffTimeNew() + "'" : null);
+        vo.setManagerTel(!vo.getManagerTel().isEmpty() ? "'" + vo.getManagerTel() + "'" : null);
+        vo.setNote(!vo.getNote().isEmpty() ? "'" + vo.getNote() + "'" : null);
+
+        return sqlSession.update("Airline.updateAirline", vo);
     }
 
     public int deleteAirline(int id) {
+        /*
         System.out.println("===> JDBC로 deleteAirline() 기능 처리");
         String sql = "delete from airline where id = " + id;
         return jdbcTemplate.update(sql);
+        */
+        return sqlSession.delete("Airline.deleteAirline", id);
     }
 
     public AirlineVO getAirline(int seq) {
+        /*
         String sql = "select * from airline where id=" + seq;
         return jdbcTemplate.queryForObject(sql, new AirlineRowMapper());
+        */
+
+        return sqlSession.selectOne("Airline.getAirline", seq);
     }
     public List<AirlineVO> getAirlineList() {
+        /*
         String sql = "select * from airline order by regdate desc";
         return jdbcTemplate.query(sql, new AirlineRowMapper());
+    */
+        List<AirlineVO> list = sqlSession.selectList("Airline.getAirlineList");
+        return list;
     }
+
 
 }
