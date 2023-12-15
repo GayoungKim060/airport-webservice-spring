@@ -2,13 +2,14 @@ package co.yeast.dao;
 
 import co.yeast.bean.AirlineVO;
 import co.yeast.bean.SearchVO;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Time;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
 * Service에 의해 호출되어 DB CRUD를 담당
@@ -18,6 +19,9 @@ public class AirlineDAO {
 
     @Autowired
     SqlSession sqlSession;
+
+//    @Autowired
+//    AirlineMapper airlineMapper;
 
     public int insertAirline(AirlineVO vo) {
         /*
@@ -127,9 +131,18 @@ public class AirlineDAO {
         return list;
     }
     // SQL Injection 공격 방지를 위해 prepareStatement 사용하여 직접 문자열 다루기
-    public List<AirlineVO> getSearchList(SearchVO searchVO){
-        System.out.println("DAO >> searchVO: " + searchVO.getSearchType() +"/"+ searchVO.getKeyword());
-        List<AirlineVO> list = sqlSession.selectList("Airline.getSearchList", searchVO);
+    public List<AirlineVO> getSearchList(String searchType, String keyword){
+//        System.out.println("DAO >> searchVO: " + searchVO.getSearchType() +"/"+ searchVO.getKeyword());
+        // mybatis 파라미터 매핑을 위해서는 HashMap사용해야함
+        Map<String, Object> params = new HashMap<>();
+        params.put("searchType", searchType);
+        params.put("keyword", keyword);
+
+        List<AirlineVO> list = sqlSession.selectList("Airline.getSearchList", params);
+//        List<AirlineVO> list = airlineMapper.getSearchList(searchVO);
+        System.out.println("DAO >> list " + list);
         return list;
+//        mybatis 정적 매핑 ${}: 문자열 그대로 치환,
+//        동적매핑 #{}: 사용자 입력에 따른 다른값이 들어갈 수 있음
     }
 }

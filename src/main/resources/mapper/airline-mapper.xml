@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!--<mapper namespace="co.yeast.dao.AirlineMapper">-->
 <mapper namespace="Airline">
     <insert id="insertAirline">
         insert into airline (takeoffDate, airline, flightName, flightNum, dest, takeoffTime, gateAlpha, gateNum, takeoffTimeNew, remark, managerTel, note)
@@ -26,7 +26,7 @@
     <select id="getRemarkList" resultType="airline">
         SELECT * from airline where remark = #{remark}
     </select>
-    <select id="getSearchList" parameterType="String" resultType="airline" >
-        SELECT * FROM airline WHERE #{searchType} LIKE CONCAT('%',#{keyword},'%') ORDER BY takeoffDate, takeoffTime DESC
+    <select id="getSearchList" resultType="airline" parameterType="hashmap">
+        SELECT * FROM airline WHERE ${searchType} LIKE CONCAT('%',#{keyword},'%') ORDER BY takeoffDate, takeoffTime DESC
     </select>
 </mapper>

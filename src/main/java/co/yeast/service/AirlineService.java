@@ -17,6 +17,5 @@ public interface AirlineService {
     public AirlineVO getAirline(int id);
     public List<AirlineVO> getAirlineList();
     public List<AirlineVO> getRemarkList();
-
-    public List<AirlineVO> getSearchList(SearchVO vo);
+    public List<AirlineVO> getSearchList(String searchType, String keyword);
 }

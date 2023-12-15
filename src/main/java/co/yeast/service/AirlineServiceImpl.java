@@ -51,7 +51,7 @@ public class AirlineServiceImpl implements AirlineService{
     }
 
     @Override
-    public List<AirlineVO> getSearchList(SearchVO vo){
-        return airlineDAO.getSearchList(vo);
+    public List<AirlineVO> getSearchList(String searchType, String keyword){
+        return airlineDAO.getSearchList(searchType, keyword);
     }
 }

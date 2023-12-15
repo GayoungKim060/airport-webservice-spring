@@ -85,10 +85,10 @@ public class AirlineController {
     }
 * */
 
-    @RequestMapping(value = "/searchtext", method = RequestMethod.POST)
-    public String searchPost(Model model, SearchVO searchVO){
-        System.out.println("searchVO: "+searchVO.getSearchType()+"/"+searchVO.getKeyword());
-        List<AirlineVO> airlineList = airlineService.getSearchList(searchVO);
+    @RequestMapping(value = "/searchtext", method = RequestMethod.GET)
+    public String searchPost(Model model, @RequestParam("searchType")String searchType, @RequestParam("keyword")String keyword){
+//        System.out.println("searchVO: "+searchVO.getSearchType()+"/"+searchVO.getKeyword());
+        List<AirlineVO> airlineList = airlineService.getSearchList(searchType, keyword);
 
         // Time 데이터를 가공하여 저장할 리스트
         List<String> formattedTakeoffTimeNew = new ArrayList<>();

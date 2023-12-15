@@ -40,7 +40,7 @@
             <div id="card-header-left" class="d-flex flex-wrap justify-content-between" >
                 <h2 class="">Departures</h2>
                 <%--   Search Form   --%>
-                <form action="searchtext" id="form-searchtext" method="POST">
+                <form action="searchtext" id="form-searchtext" method="GET">
                     <div class="search-wrapper ">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,9 +49,9 @@
                             <input type="hidden" id="hiddenType" name="searchType" value="">
                             <ul class="dropdown-menu" id="dropdownMenu">
                                 <li><a class="dropdown-item" href="#" data-value="Airline">Airline</a></li>
-                                <li><a class="dropdown-item" href="#" data-value="Flight">Flight</a></li>
-                                <li><a class="dropdown-item" href="#" data-value="Destination">Destination</a></li>
-                                <li><a class="dropdown-item" href="#" data-value="Gate">Gate</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="FlightNum">Flight Number</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Dest">Destination</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="GateAlpha">Gate</a></li>
                             </ul>
                         </div>
                         <input type="search" class="text-bg-white " id="search-input" placeholder="search" aria-label="Search" name="keyword">
@@ -194,6 +194,7 @@
 
             // 선택한 아이템의 값을 버튼의 value 속성에 업데이트
             console.log(hiddenType.value);
+            console.log()
         });
     });
 

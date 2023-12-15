@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--  순서중요  -->
     <settings>
         <setting name="jdbcTypeForNull" value="NULL"></setting>
         <setting name="callSettersOnNulls" value="true"></setting>
@@ -15,4 +16,7 @@
     <typeHandlers>
         <typeHandler handler="co.yeast.util.OptionalTypeHandler" ></typeHandler>
     </typeHandlers>
+<!--    <mappers>-->
+<!--        <mapper resource="co.yeast.dao.AirlineMapper"></mapper>-->
+<!--    </mappers>-->
 </configuration>
