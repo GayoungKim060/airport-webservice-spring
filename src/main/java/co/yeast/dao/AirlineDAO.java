@@ -15,13 +15,12 @@ import java.util.List;
 * */
 @Repository
 public class AirlineDAO {
-    @Autowired
-    JdbcTemplate jdbcTemplate;
 
     @Autowired
     SqlSession sqlSession;
 
     public int insertAirline(AirlineVO vo) {
+        /*
         System.out.println("===> JDBC로 insertAirline() 기능 처리");
 
         // 입력되지 않은 값은 database에 null 값으로 셋팅해주기 위한 변수처리
@@ -46,6 +45,8 @@ public class AirlineDAO {
                 + "'" + vo.getRemark() +"',"
                 + managerTel +","
                 + note +")";
+
+
         return jdbcTemplate.update(sql);
         */
 
@@ -63,6 +64,7 @@ public class AirlineDAO {
     }
 
     public int updateAirline(AirlineVO vo) {
+        /*
         System.out.println("===> JDBC로 updateAirline() 기능 처리");
 
         /*
@@ -89,6 +91,7 @@ public class AirlineDAO {
     }
 
     public int deleteAirline(int id) {
+        /*
         System.out.println("===> JDBC로 deleteAirline() 기능 처리");
         /* mybatis 연결 전
         String sql = "delete from airline where id = " + id;
