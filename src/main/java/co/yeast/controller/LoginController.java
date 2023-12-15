@@ -34,7 +34,7 @@ public class LoginController {
             returnURL = "redirect:/airline/list";
         }else{
             System.out.println("로그인 실패..");
-            returnURL = "redirect:/login/loginForm";
+            returnURL = "redirect:/login/login";
         }
         return returnURL;
     }

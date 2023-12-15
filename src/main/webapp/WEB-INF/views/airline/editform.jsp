@@ -66,7 +66,7 @@
                         <div class="name">Time</div>
                         <div class="value">
                             <div class="input-group">
-                                <input type="time" class="input--style-5" id="input-time" name="takeoffTime" value="${u.getTakeoffTime().substring(0, 5)}">
+                                <input type="time" class="input--style-5" id="input-time" name="takeoffTime" value="${u.getTakeoffTime()}">
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                         <div class="name">New Time</div>
                         <div class="value">
                             <div class="input-group">
-                                <input type="time" id="timeNew" class="input--style-5" name="takeoffTimeNew" value="${u.getTakeoffTimeNew().substring(0, 5)}"/>
+                                <input type="time" id="timeNew" class="input--style-5" name="takeoffTimeNew" value="${takeoffTimeNew}"/>
                             </div>
                         </div>
                     </div>
@@ -137,13 +137,13 @@
                     <div class="form-row">
                         <div class="name">Manager</div>
                         <div class="value">
-                            <input type="tel" class="input--style-5" name="managerTel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="ex) 010-0000-0000" value="${u.managerTel != null ? u.managerTel : ""}">
+                            <input type="tel" class="input--style-5" name="managerTel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="ex) 010-0000-0000" value="${managerTel.equals("NO DATA") ? "" : managerTel}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="name">Note</div>
                         <div class="value">
-                            <input type="text" class="input--style-5" name="note" value="${u.note != null ? u.note : ""}">
+                            <input type="text" class="input--style-5" name="note" value="${note.equals("NO DATA") ? "" : note}">
                         </div>
                     </div>
 

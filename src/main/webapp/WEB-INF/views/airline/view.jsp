@@ -41,7 +41,7 @@
                     <div class="form-row">
                         <div class="name">Time</div>
                         <div class="value">
-                            <p class="input--style-5">${u.getTakeoffTime().substring(0,5)}</p>
+                            <p class="input--style-5">${u.getTakeoffTime()}</p>
                         </div>
                     </div>
                     <div class="form-row m-b-55">
@@ -60,7 +60,7 @@
                     <div class="form-row">
                         <div class="name">New Time</div>
                         <div class="value">
-                            <p class="input--style-5">${u.getTakeoffTimeNew().substring(0,4).equals("null") ? "NO DATA" : u.getTakeoffTimeNew().substring(0,5)}</p>
+                            <p class="input--style-5">${takeoffTimeNew}</p>
                         </div>
                     </div>
                     <div class="form-row p-t-20">
@@ -88,13 +88,13 @@
                     <div class="form-row">
                         <div class="name">Manager</div>
                         <div class="value">
-                            <p class="input--style-5">${u.getManagerTel() != null ? u.getManagerTel() : "NO DATA"}</p>
+                            <p class="input--style-5">${managerTel}</p>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="name">Note</div>
                         <div class="value">
-                            <p class="input--style-5">${u.getNote() != null ? u.getNote() : "NO DATA"}</p>
+                            <p class="input--style-5">${note}</p>
                         </div>
                     </div>
 

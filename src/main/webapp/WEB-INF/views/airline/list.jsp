@@ -39,21 +39,39 @@
         <div class="card-header">
             <div id="card-header-left" class="d-flex flex-wrap justify-content-between" >
                 <h2 class="">Departures</h2>
-                <div class="search-wrapper ">
-                    <input type="search" class="text-bg-white " placeholder="search" aria-label="Search">
-                    <img src="/img/icon_search_delete.png" class="btn-clear">
-                </div>
+                <%--   Search Form   --%>
+                <form action="searchtext" id="form-searchtext" method="POST">
+                    <div class="search-wrapper ">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Type
+                            </button>
+                            <input type="hidden" id="hiddenType" name="searchType" value="">
+                            <ul class="dropdown-menu" id="dropdownMenu">
+                                <li><a class="dropdown-item" href="#" data-value="Airline">Airline</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Flight">Flight</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Destination">Destination</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Gate">Gate</a></li>
+                            </ul>
+                        </div>
+                        <input type="search" class="text-bg-white " id="search-input" placeholder="search" aria-label="Search" name="keyword">
+                        <img src="/img/icon_search_delete.png" class="btn-clear">
+                    </div>
+                </form>
             </div>
-            <div id="card-header-right" class="d-flex flex-wrap justify-content-around align-items-baseline" >
-                <div class="badge-wrapper">
-                    <span class="badge rounded-pill text-bg-primary fs-6" id="boardingBadge" onclick="sort('Boarding')">Boarding</span>
-                    <span class="badge rounded-pill text-bg-warning text-white fs-6" id="delayedBadge" onclick="sort('Delayed')">Delayed</span>
-                    <span class="badge rounded-pill text-bg-danger fs-6" id="cancelledBadge" onclick="sort('Cancelled')">Cancelled</span>
-                    <span class="badge rounded-pill text-bg-dark fs-6" id="scheduledBadge"onclick="sort('Scheduled')">Scheduled</span>
-                </div>
+            <%--   Search Form   --%>
+            <form action="searchRemark" method="post">
+                <div id="card-header-right" class="d-flex flex-wrap justify-content-around align-items-baseline" >
+                    <div class="badge-wrapper">
+                        <span class="badge rounded-pill text-bg-primary fs-6" id="boardingBadge" onclick="sort('Boarding')">Boarding</span>
+                        <span class="badge rounded-pill text-bg-warning text-white fs-6" id="delayedBadge" onclick="sort('Delayed')">Delayed</span>
+                        <span class="badge rounded-pill text-bg-danger fs-6" id="cancelledBadge" onclick="sort('Cancelled')">Cancelled</span>
+                        <span class="badge rounded-pill text-bg-dark fs-6" id="scheduledBadge"onclick="sort('Scheduled')">Scheduled</span>
+                    </div>
 
-                <button type="button" class="btn btn-outline-dark me-2" onclick="location.href='add'">Add</button>
-            </div>
+                    <button type="button" class="btn btn-outline-dark me-2" onclick="location.href='add'">Add</button>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="media-list position-relative">
@@ -74,7 +92,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${list}" var="u">
+                        <c:forEach items="${list}" var="u" varStatus="status">
                             <tr onclick="location.href='view?id=${u.getId()}'">
                                 <td class="text-truncate text-center">${u.getId()}</td>
                                 <td><img src="/img/logo_${u.getAirline()}.png" alt="airlineLogo"></td>
@@ -83,10 +101,12 @@
                                 </td>
                                 <td class="text-truncate text-center">${u.getFlightName()} ${u.getFlightNum()}</td>
                                 <td class="text-truncate">${u.getDest()}</td>
-                                <td class="text-truncate text-center">${u.getTakeoffTime().substring(0, 5)}</td>
+                                <td class="text-truncate text-center">${u.getTakeoffTime()}</td>
                                 <td class="text-truncate text-center">${u.getGateAlpha()}${u.getGateNum()}</td>
 
-                                <td class="text-truncate text-center">${u.getTakeoffTimeNew().substring(0, 5) eq "null:" ? '' : u.getTakeoffTimeNew().substring(0,5)}</td>
+                                <%--   <td class="text-truncate text-center">${u.getTakeoffTimeNew().substring(0, 5) eq "null:" ? '' : u.getTakeoffTimeNew().substring(0,5)}</td>   --%>
+                                <%--    JSTL에서는 loop.index로 현재 인덱스에 접근할 수 있습니다.     --%>
+                                <td class="text-truncate text-center">${formattedTime[status.index]}</td>
 
                                 <c:choose>
                                     <c:when test="${u.getRemark() eq 'Boarding'}">
@@ -155,27 +175,44 @@
         <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
     </ul>
 </footer>
+<!-- Bootstrap JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+    const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
+    const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
+    const hiddenType = document.getElementById('hiddenType');
+    const formSearchText = document.getElementById('form-searchtext');
+
+    var dropdownButton = document.getElementById('dropdownButton');
+    document.querySelectorAll('.dropdown-item').forEach(function (item) {
+        item.addEventListener('click', function () {
+            var selectedValue = this.getAttribute('data-value');
+
+            dropdownButton.textContent = selectedValue;
+            hiddenType.value = selectedValue.toLowerCase();
+
+            // 선택한 아이템의 값을 버튼의 value 속성에 업데이트
+            console.log(hiddenType.value);
+        });
+    });
+
+    const inputSearch = document.getElementById('search-input');
+
+    // 'myInput' 엘리먼트에 대해 'keydown' 이벤트 리스너를 등록합니다.
+    inputSearch.addEventListener('keydown', function (event) {
+        // event.key를 통해 눌린 키의 값에 접근할 수 있습니다.
+        if (event.key === 'Enter') {
+            // 엔터 키가 입력되었을 때 실행할 동작을 여기에 추가합니다.
+            document.getElementById('form-searchtext').submit();
+        }
+    });
+
+
     // window.ready
     window.onload = function (){
+
         // Badge 클릭시 해당 카테고리만 디스플레이
-        function sort(remark) {
-            $.ajax({
-                type: "POST", // 데이터 전송 타입
-                url: "searchpost.jsp", // 데이터를 주고받을 파일 주소 입력
-                data: {remark: remark}, // 보내는 데이터
-                dataType: "html", // 문자 형식으로 받기
-                success: function(result) {
-                    // Update the content with the sorted data
-                    $("#yourContentContainerId").html(result);
-                },
-                error: function () {
-                    // Handle error
-                    console.error("Error in AJAX request");
-                }
-            });
-        }
 
         // clear 이미지 클릭시 부모 내용 삭제
         const btnClear = document.querySelectorAll('.btn-clear');

@@ -306,6 +306,39 @@
             });
         });
 
+
+        // input 태그에 blur 이벤트를 추가하여 시간 형식을 조작
+        var inputTime = document.getElementById('input-time');
+        var inputTimeNew = document.getElementById('input-new-time');
+        if (inputTime || inputTimeNew) {
+            inputTime.addEventListener('blur', function () {
+                // 현재 입력된 값을 가져옴
+                var currentTime = this.value;
+
+                // 만약 값이 비어있다면 아무 것도 하지 않음
+                if (!currentTime) {
+                    return;
+                }
+
+                // 시간을 HH:mm:00 형식으로 변환
+                this.value = currentTime + ':00';
+                console.log(this.value);
+            });
+
+            inputTimeNew.addEventListener('blur', function () {
+                // 현재 입력된 값을 가져옴
+                var currentTimeNew = this.value;
+
+                // 만약 값이 비어있다면 아무 것도 하지 않음
+                if (!currentTimeNew) {
+                    return;
+                }
+
+                // 시간을 HH:mm:00 형식으로 변환
+                this.value = currentTimeNew + ':00';
+                console.log(this.value);
+            });
+        }
     }; // END OF "window.onload"
 
 </script>

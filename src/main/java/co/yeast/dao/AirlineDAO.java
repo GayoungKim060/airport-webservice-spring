@@ -1,25 +1,37 @@
 package co.yeast.dao;
 
 import co.yeast.bean.AirlineVO;
+import co.yeast.bean.SearchVO;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Time;
 import java.util.List;
 
+/*
+* Service에 의해 호출되어 DB CRUD를 담당
+* */
 @Repository
 public class AirlineDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    SqlSession sqlSession;
+
     public int insertAirline(AirlineVO vo) {
         System.out.println("===> JDBC로 insertAirline() 기능 처리");
 
         // 입력되지 않은 값은 database에 null 값으로 셋팅해주기 위한 변수처리
-        String takeoffTimeNew = vo.getTakeoffTimeNew() != null ? "'" + vo.getTakeoffTimeNew() + "'" : null;
-        String managerTel = !vo.getManagerTel().isEmpty() ? "'" + vo.getManagerTel() + "'" : null;
-        String note = !vo.getNote().isEmpty() ? "'" + vo.getNote() + "'" : null;
+        // jdbcType을 명시해주면 null처리가 되어 데이터베이스에 들어감
+        System.out.println("takeoffTime 전 : " + vo.getTakeoffTime());
+        System.out.println("takeoffTimeNew 전 : " + vo.getTakeoffTimeNew());
+        System.out.println("managerTel 전 : " + vo.getManagerTel());
+        System.out.println("note 전 : " + vo.getNote());
 
+        /* mybatis 연결 전
         String sql = "insert into airline(takeoffDate, airline, flightName, flightNum, dest, takeoffTime, gateAlpha, gateNum, takeoffTimeNew, remark, managerTel, note) values ("
                 + "'" + vo.getTakeoffDate() +"',"
                 + "'" + vo.getAirline() +"',"
@@ -35,6 +47,12 @@ public class AirlineDAO {
                 + managerTel +","
                 + note +")";
         return jdbcTemplate.update(sql);
+        */
+
+        vo.setFlightName(convertFlightName(vo.getAirline()));
+
+        int count = sqlSession.insert("Airline.insertAirline", vo);
+        return count;
     }
     private String convertFlightName(String airline){
         if(airline.equals("Delta")) return "DA";
@@ -46,10 +64,8 @@ public class AirlineDAO {
 
     public int updateAirline(AirlineVO vo) {
         System.out.println("===> JDBC로 updateAirline() 기능 처리");
-        String takeoffTimeNew = vo.getTakeoffTimeNew() != null ? "'" + vo.getTakeoffTimeNew() + "'" : "null";
-        String managerTel = !vo.getManagerTel().isEmpty() ? "'" + vo.getManagerTel() + "'" : null;
-        String note = !vo.getNote().isEmpty() ? "'" + vo.getNote() + "'" : null;
 
+        /*
         String sql = "update airline set airline='" + vo.getAirline() + "',"
                 + " flightName='" + convertFlightName(vo.getAirline()) + "',"
                 + " flightNum='" + vo.getFlightNum() + "',"
@@ -62,21 +78,55 @@ public class AirlineDAO {
                 + " managerTel=" + managerTel + ","
                 + " note= " + note + " where id=" + vo.getId();
         return jdbcTemplate.update(sql);
+        */
+
+        System.out.println("takeoffTime(): "+ vo.getTakeoffTime());
+        System.out.println("takeoffTimeNew(): "+ vo.getTakeoffTimeNew());
+        vo.setFlightName(convertFlightName(vo.getAirline()));
+
+        int count = sqlSession.update("Airline.updateAirline", vo);
+        return count;
     }
 
     public int deleteAirline(int id) {
         System.out.println("===> JDBC로 deleteAirline() 기능 처리");
+        /* mybatis 연결 전
         String sql = "delete from airline where id = " + id;
         return jdbcTemplate.update(sql);
+        */
+
+        int count = sqlSession.delete("Airline.deleteAirline", id);
+        return count;
     }
 
-    public AirlineVO getAirline(int seq) {
+    // null 값을 담기 위해 Optional로 리턴
+    public AirlineVO getAirline(int id) {
+        /*
         String sql = "select * from airline where id=" + seq;
         return jdbcTemplate.queryForObject(sql, new AirlineRowMapper());
+        */
+
+        AirlineVO one = sqlSession.selectOne("Airline.getAirline", id);
+        return one;
     }
     public List<AirlineVO> getAirlineList() {
+        /* mybatis 적용전
         String sql = "select * from airline order by regdate desc";
         return jdbcTemplate.query(sql, new AirlineRowMapper());
+        */
+
+        List<AirlineVO> list = sqlSession.selectList("Airline.getAirlineList");
+        return list;
     }
 
+    public List<AirlineVO> getRemarkList(){
+        List<AirlineVO> list = sqlSession.selectList("Airline.getRemarkList");
+        return list;
+    }
+    // SQL Injection 공격 방지를 위해 prepareStatement 사용하여 직접 문자열 다루기
+    public List<AirlineVO> getSearchList(SearchVO searchVO){
+        System.out.println("DAO >> searchVO: " + searchVO.getSearchType() +"/"+ searchVO.getKeyword());
+        List<AirlineVO> list = sqlSession.selectList("Airline.getSearchList", searchVO);
+        return list;
+    }
 }

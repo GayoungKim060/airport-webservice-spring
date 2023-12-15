@@ -5,10 +5,13 @@
 
 <mapper namespace="Airline">
     <insert id="insertAirline">
-        insert into airline (takeoffDate, airline, flightName, flightNum, dest, takeoffTime, gateAlpha, gateNum, takeoffTimeNew, remark, managerTel, note) values ( #{takeoffDate}, #{airline}, #{flightName}, #{flightNum}, #{dest}, #{takeoffTime}, #{gateAlpha}, #{gateNum}, #{takeoffTimeNew}, #{remark}, #{managerTel}, #{note})
+        insert into airline (takeoffDate, airline, flightName, flightNum, dest, takeoffTime, gateAlpha, gateNum, takeoffTimeNew, remark, managerTel, note)
+        values ( #{takeoffDate}, #{airline}, #{flightName}, #{flightNum}, #{dest}, #{takeoffTime, jdbcType=TIME}, #{gateAlpha}, #{gateNum}
+               ,#{takeoffTimeNew, jdbcType=TIME}, #{remark}, #{managerTel, jdbcType=VARCHAR}, #{note, jdbcType=VARCHAR} )
     </insert>
     <update id="updateAirline">
-        update airline set airline=#{airline}, flightName=#{flightName}, flightNum=#{flightNum}, dest=#{dest}, takeoffTime=#{takeoffTime}, gateAlpha=#{gateAlpha}, gateNum=#{gateNum}, takeoffTimeNew=#{takeoffTimeNew}, remark=#{remark} managerTel=#{managerTel}, note=#{note} where id=#{id}
+        update airline set airline=#{airline}, flightName=#{flightName}, flightNum=#{flightNum}, dest=#{dest}, takeoffTime=#{takeoffTime}, gateAlpha=#{gateAlpha}, gateNum=#{gateNum}, takeoffTimeNew=#{takeoffTimeNew, jdbcType=TIME}, remark=#{remark}, managerTel=#{managerTel, jdbcType=VARCHAR}, note=#{note, jdbcType=VARCHAR}
+                       where id=#{id}
     </update>
     <delete id="deleteAirline">
         delete from airline where id =#{id}
@@ -18,5 +21,12 @@
     </select>
     <select id="getAirlineList" resultType="airline">
         select * from airline order by id desc
+    </select>
+<!--  resultType="int"활용하여 boarding 개수 표시하기   -->
+    <select id="getRemarkList" resultType="airline">
+        SELECT * from airline where remark = #{remark}
+    </select>
+    <select id="getSearchList" parameterType="String" resultType="airline" >
+        SELECT * FROM airline WHERE #{searchType} LIKE CONCAT('%',#{keyword},'%') ORDER BY takeoffDate, takeoffTime DESC
     </select>
 </mapper>

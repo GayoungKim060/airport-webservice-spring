@@ -3,10 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"></setting>
+        <setting name="callSettersOnNulls" value="true"></setting>
+    </settings>
     <typeAliases>
         <typeAlias alias="airline" type="co.yeast.bean.AirlineVO"></typeAlias>
         <typeAlias alias="user" type="co.yeast.bean.UserVO"></typeAlias>
+        <typeAlias alias="search" type="co.yeast.bean.SearchVO"></typeAlias>
     </typeAliases>
-
+    <typeHandlers>
+        <typeHandler handler="co.yeast.util.OptionalTypeHandler" ></typeHandler>
+    </typeHandlers>
 </configuration>
