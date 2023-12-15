@@ -87,7 +87,6 @@ public class AirlineController {
 
     @RequestMapping(value = "/searchtext", method = RequestMethod.GET)
     public String searchPost(Model model, @RequestParam("searchType")String searchType, @RequestParam("keyword")String keyword){
-//        System.out.println("searchVO: "+searchVO.getSearchType()+"/"+searchVO.getKeyword());
         List<AirlineVO> airlineList = airlineService.getSearchList(searchType, keyword);
 
         // Time 데이터를 가공하여 저장할 리스트
@@ -117,11 +116,37 @@ public class AirlineController {
         return "airline/list";
     }
 
-/*    @RequestMapping(value = "/searchRemark", method = RequestMethod.POST)
-    public String searchPost(Model model, SearchVO searchVO){
+    @RequestMapping(value = "/searchRemark", method = RequestMethod.POST)
+    public String searchPost(Model model, String remark){
+        System.out.println("remark: "+remark);
+        List<AirlineVO> airlineList = airlineService.getRemarkList(remark);
+
+        // Time 데이터를 가공하여 저장할 리스트
+        List<String> formattedTakeoffTimeNew = new ArrayList<>();
+
+        // Views에서 보여줄 Data Processing
+        for (AirlineVO airlineVO : airlineList) {
+//            DEBUG    airlineList에 저장된 각 AirlineVO 객체의 takeoffTimeNew 필드 출력
+//            System.out.println("airline: " + airlineVO.getAirline());
+//            System.out.println("TakeoffTime, TakeoffTimeNew: " + airlineVO.getTakeoffTime()+ airlineVO.getTakeoffTimeNew());
+
+            Optional<Time> takeoffTimeNewOptional = airlineVO.getTakeoffTimeNew();
+
+            if(takeoffTimeNewOptional.isPresent()){
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                formattedTakeoffTimeNew.add(
+                        sdf.format(takeoffTimeNewOptional.get()));
+            }else{
+                formattedTakeoffTimeNew.add("");        // 빈 문자열 설정
+            }
+        }
+
+        model.addAttribute("list", airlineList);
+        model.addAttribute("formattedTime", formattedTakeoffTimeNew);
 
         return "airline/list";
-    }*/
+    }
 
     // edit과 같은 코드, @RequestParam 사용하여 id 받기
     @RequestMapping(value = "/view", method = RequestMethod.GET)

@@ -60,8 +60,9 @@
                 </form>
             </div>
             <%--   Search Form   --%>
-            <form action="searchRemark" method="post">
+            <form action="searchRemark" method="POST" id="form-searchRemark">
                 <div id="card-header-right" class="d-flex flex-wrap justify-content-around align-items-baseline" >
+                    <input type="hidden" id="hiddenRemark" name="remark" value="">
                     <div class="badge-wrapper">
                         <span class="badge rounded-pill text-bg-primary fs-6" id="boardingBadge" onclick="sort('Boarding')">Boarding</span>
                         <span class="badge rounded-pill text-bg-warning text-white fs-6" id="delayedBadge" onclick="sort('Delayed')">Delayed</span>
@@ -209,6 +210,12 @@
         }
     });
 
+    const hiddenRemark = document.getElementById('hiddenRemark');
+    // sort 함수 정의
+    function sort(parameter) {
+        hiddenRemark.value = parameter;
+        document.getElementById('form-searchRemark').submit();
+    }
 
     // window.ready
     window.onload = function (){

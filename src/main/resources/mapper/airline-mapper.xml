@@ -23,7 +23,7 @@
         select * from airline order by id desc
     </select>
 <!--  resultType="int"활용하여 boarding 개수 표시하기   -->
-    <select id="getRemarkList" resultType="airline">
+    <select id="getRemarkList" resultType="airline" parameterType="String">
         SELECT * from airline where remark = #{remark}
     </select>
     <select id="getSearchList" resultType="airline" parameterType="hashmap">

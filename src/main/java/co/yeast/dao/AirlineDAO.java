@@ -126,14 +126,13 @@ public class AirlineDAO {
         return list;
     }
 
-    public List<AirlineVO> getRemarkList(){
-        List<AirlineVO> list = sqlSession.selectList("Airline.getRemarkList");
+    public List<AirlineVO> getRemarkList(String remark){
+        List<AirlineVO> list = sqlSession.selectList("Airline.getRemarkList", remark);
         return list;
     }
     // SQL Injection 공격 방지를 위해 prepareStatement 사용하여 직접 문자열 다루기
     public List<AirlineVO> getSearchList(String searchType, String keyword){
-//        System.out.println("DAO >> searchVO: " + searchVO.getSearchType() +"/"+ searchVO.getKeyword());
-        // mybatis 파라미터 매핑을 위해서는 HashMap사용해야함
+        //  mybatis 파라미터 매핑을 위해서는 HashMap사용해야함
         Map<String, Object> params = new HashMap<>();
         params.put("searchType", searchType);
         params.put("keyword", keyword);
@@ -142,7 +141,9 @@ public class AirlineDAO {
 //        List<AirlineVO> list = airlineMapper.getSearchList(searchVO);
         System.out.println("DAO >> list " + list);
         return list;
-//        mybatis 정적 매핑 ${}: 문자열 그대로 치환,
-//        동적매핑 #{}: 사용자 입력에 따른 다른값이 들어갈 수 있음
+
+//        mybatis
+//        정적 매핑 ${}: 문자열 그대로 치환
+//        동적 매핑 #{}: 사용자 입력에 따른 다른값이 들어갈 수 있음
     }
 }

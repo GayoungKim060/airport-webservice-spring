@@ -1,13 +1,11 @@
 package co.yeast.service;
 
 import co.yeast.bean.AirlineVO;
-import co.yeast.bean.SearchVO;
 import co.yeast.dao.AirlineDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AirlineServiceImpl implements AirlineService{
@@ -46,8 +44,8 @@ public class AirlineServiceImpl implements AirlineService{
     }
 
     @Override
-    public List<AirlineVO> getRemarkList() {
-        return airlineDAO.getRemarkList();
+    public List<AirlineVO> getRemarkList(String remark) {
+        return airlineDAO.getRemarkList(remark);
     }
 
     @Override
