@@ -118,7 +118,6 @@ public class AirlineController {
 
     @RequestMapping(value = "/searchRemark", method = RequestMethod.POST)
     public String searchPost(Model model, String remark){
-        System.out.println("remark: "+remark);
         List<AirlineVO> airlineList = airlineService.getRemarkList(remark);
 
         // Time 데이터를 가공하여 저장할 리스트

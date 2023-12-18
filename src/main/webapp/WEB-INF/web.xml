@@ -42,5 +42,8 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <!--  배포후 서버가 첫 페이지 찾아가는 경로설정  -->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

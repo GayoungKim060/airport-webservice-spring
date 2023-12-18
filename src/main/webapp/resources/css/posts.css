@@ -62,16 +62,10 @@ header .logo-seagull{
     width: 50px;
 }
 
-.card-header #card-header-left{
-    width: 40%;
-}
 
-.card-header #card-header-right{
-    width: 50%;
-}
 /* container-list */
 body{
-    background-color: #f6f6f6;
+    background-color: #ffffff;
     margin-top:20px;
 }
 

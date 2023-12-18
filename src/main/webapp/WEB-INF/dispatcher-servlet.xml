@@ -20,7 +20,7 @@
 
     <!--  image mapping 정보  -->
     <!--  한번에  -->
-<!--    <mvc:resources mapping="/**" location="/resources/"/>-->
+    <mvc:resources mapping="/**" location="/resources/"/>
     <mvc:resources mapping="/img/**" location="/resources/img/"/>
     <mvc:resources mapping="/css/**" location="/resources/css/"/>
 
@@ -35,6 +35,7 @@
             <mvc:exclude-mapping path="/img/**" />
             <mvc:exclude-mapping path="/css/**" />
             <mvc:exclude-mapping path="/login/**" />
+            <mvc:exclude-mapping path="/" />
             <ref bean="loginCheckInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
